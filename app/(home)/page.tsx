@@ -31,16 +31,16 @@ export default function Home() {
       </section>
 
       {/* Disclaimer Section */}
-      <section className="text-center max-w-2xl mx-auto">
-        <p className="text-sm text-gray-400">
-          <span className="block text-lg font-semibold mb-2">
-            The Fine Print™
+      <section className="text-center max-w-2xl mx-auto border border-muted rounded-lg p-6 bg-muted/50">
+        <p className="text-sm text-muted-foreground">
+          <span className="block text-lg font-mono font-semibold mb-2">
+            The Fine Print
           </span>
           Look, we&apos;re not lawyers. We just play them on the internet. But
           if you&apos;re a{" "}
           <Link
             href="https://backgroundcraft.com"
-            className="text-white hover:text-gray-200 underline underline-offset-4"
+            className="text-muted-foreground hover:text-primary underline underline-offset-4"
             target="_blank"
             rel="noopener noreferrer">
             Background Craft
