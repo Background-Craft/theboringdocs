@@ -28,12 +28,17 @@ export default function SiteHeader() {
 
         <div className="flex items-center justify-end lg:px-2 lg:py-1">
           <LightSwitch />
-          <BGCButton
-            href="https://backgroundcraft.com"
-            external={true}
-            text="Background Craft"
-            icon={<ExternalLink className="h-4 w-4 mb-1" />}
-          />
+          <div className="relative">
+            <span className="absolute -left-24 bottom-[-24px] font-caveat text-lg text-muted-foreground/80 transform -rotate-6 whitespace-nowrap before:content-['→'] before:absolute before:right-[-22px] before:top-[2px] before:rotate-[-30deg]">
+              a project by
+            </span>
+            <BGCButton
+              href="https://backgroundcraft.com"
+              external={true}
+              text="Background Craft"
+              icon={<ExternalLink className="h-4 w-4 mb-1" />}
+            />
+          </div>
         </div>
       </div>
     </header>

@@ -85,6 +85,9 @@ export default {
       animation: {
         glitch: "glitch 7s linear infinite",
       },
+      fontFamily: {
+        caveat: ["var(--font-caveat)"],
+      },
     },
   },
   // eslint-disable-next-line @typescript-eslint/no-require-imports
