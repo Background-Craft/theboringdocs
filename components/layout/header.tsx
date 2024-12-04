@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LogoSquare from "@/components/logos/square";
+import { ExternalLink } from "lucide-react";
 
 export default function SiteHeader() {
   return (
@@ -28,8 +29,8 @@ export default function SiteHeader() {
             href="https://backgroundcraft.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium">
-            Background Craft →
+            className="px-4 py-2 rounded-md border border-primary bg-background text-primary text-sm hover:shadow-[4px_4px_0px_0px_hsl(var(--primary))] transition duration-200 flex items-center gap-2">
+            Background Craft <ExternalLink className="h-4 w-4 mb-1" />
           </Link>
         </div>
       </div>

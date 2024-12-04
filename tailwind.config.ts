@@ -56,6 +56,33 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      keyframes: {
+        glitch: {
+          "0%": {
+            color: "#fff",
+            textShadow: "2px 2px 0px #00ffff, -2px -2px 0px #ff00ff",
+          },
+          "25%": {
+            color: "#00ffff",
+            textShadow: "-2px -2px 0px #fff, 2px 2px 0px #ff00ff",
+          },
+          "50%": {
+            color: "#ff00ff",
+            textShadow: "2px -2px 0px #00ffff, -2px 2px 0px #fff",
+          },
+          "75%": {
+            color: "#eee",
+            textShadow: "-2px 2px 0px #ff00ff, 2px -2px 0px #00ffff",
+          },
+          "100%": {
+            color: "#fff",
+            textShadow: "2px 2px 0px #00ffff, -2px -2px 0px #ff00ff",
+          },
+        },
+      },
+      animation: {
+        glitch: "glitch 2s linear infinite",
+      },
     },
   },
   // eslint-disable-next-line @typescript-eslint/no-require-imports
