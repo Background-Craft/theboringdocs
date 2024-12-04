@@ -112,6 +112,14 @@ export default function TOSGenerator() {
     setFormData(initialFormData);
   };
 
+  const getMissingRequiredField = () => {
+    if (!formData.businessType) return "Business Type";
+    if (formData.salesTypes.length === 0) return "Sales Type";
+    if (!formData.companyName) return "Company Name";
+    if (!formData.website) return "Website";
+    return null;
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-8">
       <span className="flex justify-start">
@@ -371,13 +379,10 @@ export default function TOSGenerator() {
             <Button
               onClick={handleGenerateTOS}
               className="w-1/2"
-              disabled={
-                !formData.companyName ||
-                !formData.website ||
-                !formData.businessType ||
-                formData.salesTypes.length === 0
-              }>
-              Preview Terms of Service
+              disabled={!!getMissingRequiredField()}>
+              {getMissingRequiredField()
+                ? `Fill ${getMissingRequiredField()} to Preview ToS`
+                : "Preview Terms of Service"}
             </Button>
           </div>
 
