@@ -7,7 +7,7 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <section className="space-y-6 text-center">
-        <h1 className="text-4xl sm:text-6xl font-bold tracking-tighter">
+        <h1 className="text-4xl sm:text-6xl font-bold tracking-tighter glitch-text z-10 animate-glitch p-6 md:p-12 md:text-8xl">
           Legal Docs That Don&apos;t Suck™
         </h1>
         <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto">

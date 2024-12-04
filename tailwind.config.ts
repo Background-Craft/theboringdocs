@@ -58,30 +58,32 @@ export default {
       },
       keyframes: {
         glitch: {
-          "0%": {
-            color: "#fff",
-            textShadow: "2px 2px 0px #00ffff, -2px -2px 0px #ff00ff",
+          "0%, 5%, 100%": {
+            color: "hsl(var(--primary))",
+            textShadow: "2px 2px 0px #00ff66, -2px -2px 0px #00cc44",
           },
-          "25%": {
-            color: "#00ffff",
-            textShadow: "-2px -2px 0px #fff, 2px 2px 0px #ff00ff",
+          "1%": {
+            color: "#00ff66",
+            textShadow:
+              "-2px -2px 0px hsl(var(--primary)), 2px 2px 0px #00cc44",
           },
-          "50%": {
-            color: "#ff00ff",
-            textShadow: "2px -2px 0px #00ffff, -2px 2px 0px #fff",
+          "2%": {
+            color: "#00cc44",
+            textShadow:
+              "2px -2px 0px #00ff66, -2px 2px 0px hsl(var(--primary))",
           },
-          "75%": {
-            color: "#eee",
-            textShadow: "-2px 2px 0px #ff00ff, 2px -2px 0px #00ffff",
+          "3%": {
+            color: "#33ff99",
+            textShadow: "-2px 2px 0px #00cc44, 2px -2px 0px #00ff66",
           },
-          "100%": {
-            color: "#fff",
-            textShadow: "2px 2px 0px #00ffff, -2px -2px 0px #ff00ff",
+          "4%": {
+            color: "hsl(var(--primary))",
+            textShadow: "2px 2px 0px #00ff66, -2px -2px 0px #00cc44",
           },
         },
       },
       animation: {
-        glitch: "glitch 2s linear infinite",
+        glitch: "glitch 7s linear infinite",
       },
     },
   },
