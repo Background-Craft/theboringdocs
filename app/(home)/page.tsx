@@ -18,7 +18,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="flex justify-center">
+      <section className="flex flex-col md:flex-row justify-center gap-6 flex-wrap">
         {FEATURES.map((feature) => (
           <FeatureCard
             key={feature.title}
