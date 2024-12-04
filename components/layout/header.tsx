@@ -30,6 +30,7 @@ export default function SiteHeader() {
           <LightSwitch />
           <BGCButton
             href="https://backgroundcraft.com"
+            external={true}
             text="Background Craft"
             icon={<ExternalLink className="h-4 w-4 mb-1" />}
           />

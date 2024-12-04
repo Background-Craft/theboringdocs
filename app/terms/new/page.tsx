@@ -17,10 +17,31 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { generateTOS } from "@/lib/generators/tos";
-import { ListRestart } from "lucide-react";
+import { Home, ListRestart } from "lucide-react";
+import { BGCButton } from "@/components/bgc/button";
+import Link from "next/link";
+import { PreviewDialog } from "@/components/bgc/preview-dialog";
+
+interface FormData {
+  businessType: string;
+  salesTypes: string[];
+  companyName: string;
+  website: string;
+  hasRefundPolicy: boolean;
+  refundDays: number;
+  format: string;
+  jurisdiction: string;
+  dataHandling: string;
+  disputeResolution: string;
+  terminationTerms: string;
+  intellectualProperty: string;
+  liabilityLimitations: string;
+  warrantyDisclaimers: string;
+  contactInformation: string;
+}
 
 export default function TOSGenerator() {
-  const [formData, setFormData] = useState({
+  const initialFormData: FormData = {
     businessType: "",
     salesTypes: [],
     companyName: "",
@@ -36,7 +57,15 @@ export default function TOSGenerator() {
     liabilityLimitations: "",
     warrantyDisclaimers: "",
     contactInformation: "",
-  });
+  };
+
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [generatedTOS, setGeneratedTOS] = useState<string>("");
+
+  const isFormDirty = () => {
+    return JSON.stringify(formData) !== JSON.stringify(initialFormData);
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -62,32 +91,23 @@ export default function TOSGenerator() {
 
   const handleGenerateTOS = () => {
     const tos = generateTOS(formData);
-    console.log(tos);
-    // Here you would typically show the generated TOS in a modal or copy to clipboard
+    setGeneratedTOS(tos);
+    setPreviewOpen(true);
   };
 
   const resetForm = () => {
-    setFormData({
-      businessType: "",
-      salesTypes: [],
-      companyName: "",
-      website: "",
-      hasRefundPolicy: false,
-      refundDays: 30,
-      format: "markdown",
-      jurisdiction: "",
-      dataHandling: "",
-      disputeResolution: "",
-      terminationTerms: "",
-      intellectualProperty: "",
-      liabilityLimitations: "",
-      warrantyDisclaimers: "",
-      contactInformation: "",
-    });
+    setFormData(initialFormData);
   };
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-8">
+      <span className="flex justify-start">
+        <BGCButton
+          href="/"
+          text="Go Home"
+          icon={<Home className="h-4 w-4" />}
+        />
+      </span>
       <Card>
         <CardHeader>
           <CardTitle className="text-3xl font-bold">
@@ -119,10 +139,10 @@ export default function TOSGenerator() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="individual">
-                      Individual (You're a one-person army)
+                      Individual (You&apos;re a one-person army)
                     </SelectItem>
                     <SelectItem value="incorporated">
-                      Incorporated (You've got backup)
+                      Incorporated (You&apos;ve got backup)
                     </SelectItem>
                   </SelectContent>
                 </Select>
@@ -189,8 +209,8 @@ export default function TOSGenerator() {
                       }
                     />
                     <Label htmlFor="hasRefundPolicy">
-                      Include Refund Policy (Because sometimes it's just not
-                      meant to be)
+                      Include Refund Policy (Because sometimes it&apos;s just
+                      not meant to be)
                     </Label>
                   </div>
 
@@ -347,7 +367,8 @@ export default function TOSGenerator() {
             <Button
               onClick={resetForm}
               variant="outline"
-              className="flex items-center gap-2">
+              className="flex items-center gap-2"
+              disabled={!isFormDirty()}>
               <ListRestart className="h-4 w-4" /> Reset Form
             </Button>
             <Button
@@ -359,17 +380,32 @@ export default function TOSGenerator() {
                 !formData.businessType ||
                 formData.salesTypes.length === 0
               }>
-              Generate Terms of Service
+              Preview Terms of Service
             </Button>
           </div>
 
-          <Alert variant="warning" className="mt-6">
+          <Alert className="mt-6">
             <AlertDescription>
               This generator creates a basic Terms of Service. For bulletproof
-              legal protection, consult a lawyer. We're good, but we're not that
-              good.
+              legal protection, let{" "}
+              <Link
+                href="https://backgroundcraft.com"
+                className="text-muted-foreground hover:text-primary underline underline-offset-4"
+                target="_blank"
+                rel="noopener noreferrer">
+                Background Craft
+              </Link>{" "}
+              handle all your legal documents professionally. We&apos;ll take
+              care of the boring stuff while you focus on what matters.
             </AlertDescription>
           </Alert>
+
+          <PreviewDialog
+            open={previewOpen}
+            onOpenChange={setPreviewOpen}
+            content={generatedTOS}
+            format={formData.format}
+          />
         </CardContent>
       </Card>
     </div>

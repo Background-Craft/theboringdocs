@@ -12,7 +12,7 @@ export function BGCButton({
   href,
   text,
   icon,
-  external = true,
+  external = false,
 }: BGCButtonProps) {
   return (
     <Link
