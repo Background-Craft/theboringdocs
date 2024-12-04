@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Link from "next/link";
 import SiteHeader from "@/components/layout/header";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           defer
@@ -35,24 +36,30 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
-        <SiteHeader />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-20 flex-grow">
-          {children}
-        </main>
-        {/* Footer */}
-        <footer className="text-center text-sm text-gray-500 py-4">
-          <p>
-            Brought to you by{" "}
-            <Link
-              href="https://backgroundcraft.com"
-              className="text-muted-foreground hover:text-primary underline underline-offset-4"
-              target="_blank"
-              rel="noopener noreferrer">
-              Background Craft
-            </Link>{" "}
-            – because someone had to do it.
-          </p>
-        </footer>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
+          <SiteHeader />
+          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-20 flex-grow">
+            {children}
+          </main>
+          {/* Footer */}
+          <footer className="text-center text-sm text-gray-500 py-4">
+            <p>
+              Brought to you by{" "}
+              <Link
+                href="https://backgroundcraft.com"
+                className="text-muted-foreground hover:text-primary underline underline-offset-4"
+                target="_blank"
+                rel="noopener noreferrer">
+                Background Craft
+              </Link>{" "}
+              – because someone had to do it.
+            </p>
+          </footer>
+        </ThemeProvider>
       </body>
     </html>
   );
