@@ -40,6 +40,19 @@ interface FormData {
   contactInformation: string;
 }
 
+const RequiredLabel = ({
+  children,
+  htmlFor,
+}: {
+  children: React.ReactNode;
+  htmlFor?: string;
+}) => (
+  <Label htmlFor={htmlFor} className="flex items-center gap-1">
+    {children}
+    <span className="text-red-500">*</span>
+  </Label>
+);
+
 export default function TOSGenerator() {
   const initialFormData: FormData = {
     businessType: "",
@@ -127,7 +140,7 @@ export default function TOSGenerator() {
             </TabsList>
             <TabsContent value="basics" className="space-y-6">
               <div className="space-y-4">
-                <Label>Business Type</Label>
+                <RequiredLabel>Business Type</RequiredLabel>
                 <Select
                   name="businessType"
                   onValueChange={(value) =>
@@ -149,7 +162,9 @@ export default function TOSGenerator() {
               </div>
 
               <div className="space-y-4">
-                <Label>What do you sell? (Choose your weapon)</Label>
+                <RequiredLabel>
+                  What do you sell? (Choose your weapon)
+                </RequiredLabel>
                 <div className="flex flex-wrap gap-2">
                   {["none", "digital", "physical", "subscription"].map(
                     (type) => (
@@ -170,7 +185,9 @@ export default function TOSGenerator() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="companyName">Company/Business Name</Label>
+                <RequiredLabel htmlFor="companyName">
+                  Company/Business Name
+                </RequiredLabel>
                 <Input
                   id="companyName"
                   name="companyName"
@@ -181,7 +198,7 @@ export default function TOSGenerator() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="website">Website</Label>
+                <RequiredLabel htmlFor="website">Website</RequiredLabel>
                 <Input
                   id="website"
                   name="website"
@@ -336,32 +353,12 @@ export default function TOSGenerator() {
                   placeholder="How to reach us (smoke signals not accepted)"
                 />
               </div>
-
-              <div className="space-y-4">
-                <Label>Output Format</Label>
-                <div className="flex space-x-4">
-                  <Button
-                    onClick={() =>
-                      setFormData((prev) => ({ ...prev, format: "markdown" }))
-                    }
-                    variant={
-                      formData.format === "markdown" ? "default" : "outline"
-                    }>
-                    Markdown
-                  </Button>
-                  <Button
-                    onClick={() =>
-                      setFormData((prev) => ({ ...prev, format: "html" }))
-                    }
-                    variant={
-                      formData.format === "html" ? "default" : "outline"
-                    }>
-                    HTML
-                  </Button>
-                </div>
-              </div>
             </TabsContent>
           </Tabs>
+
+          <div className="mt-6 text-sm text-muted-foreground">
+            <span className="text-red-500">*</span> Required fields
+          </div>
 
           <div className="flex justify-between mt-8">
             <Button
@@ -399,7 +396,6 @@ export default function TOSGenerator() {
               care of the boring stuff while you focus on what matters.
             </AlertDescription>
           </Alert>
-
           <PreviewDialog
             open={previewOpen}
             onOpenChange={setPreviewOpen}
