@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,8 +33,25 @@ export default function RootLayout({
           data-website-id="ce58ae45-2dd0-48b6-8df2-bb3e8625e6da"></script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
+        {/* Add Header w/ Navbar */}
+        <main className="container mx-auto px-4 py-20 space-y-20 flex-grow">
+          {children}
+        </main>
+        {/* Footer */}
+        <footer className="text-center text-sm text-gray-500 py-4">
+          <p>
+            Brought to you by{" "}
+            <Link
+              href="https://backgroundcraft.com"
+              className="text-gray-400 hover:text-white transition-colors"
+              target="_blank"
+              rel="noopener noreferrer">
+              Background Craft
+            </Link>{" "}
+            – because someone had to do it.
+          </p>
+        </footer>
       </body>
     </html>
   );
