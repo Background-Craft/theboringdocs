@@ -11,6 +11,9 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkHtml from "remark-html";
 
 interface PreviewDialogProps {
   open: boolean;
@@ -32,8 +35,14 @@ export function PreviewDialog({
   const handleCopy = async (type: "text" | "html" | "markdown") => {
     let textToCopy = content;
 
-    if (type === "text" && format !== "text") {
+    if (type === "text") {
       textToCopy = content.replace(/[#*`]/g, "").replace(/<[^>]*>/g, "");
+    } else if (type === "html") {
+      const result = await unified()
+        .use(remarkParse)
+        .use(remarkHtml)
+        .process(content);
+      textToCopy = String(result);
     }
 
     await navigator.clipboard.writeText(textToCopy);
